@@ -1,69 +1,69 @@
 var myQuestions = [
     {
-        question: "what is 2+2",
+        question: "Endermen can be damaged in several ways. Which of the following has been made up?",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: 'Melee attacks',
+            b: 'Splash water bottles',
+            c: 'Rolled up newspaper',
         },
-        correctAnswer: 'b'
+        correctAnswer: 'a'
 
 
     },
 
     {
-        question: "what is 2+2",
+        question: "How many blocks of iron ore does it take to make one iron ingot?",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: '3',
+            b: '1',
+            c: 'What is an iron ingot? ',
         },
         correctAnswer: 'b'
 
     },
 
     {
-        question: "what is 2+2",
+        question: "What are Creepers scared of?",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: 'The dark',
+            b: 'Spiders',
+            c: 'Ocelots',
         },
-        correctAnswer: 'b'
+        correctAnswer: 'c'
 
 
     },
 
     {
-        question: "what is 2+2",
+        question: "How do you make obsidian",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: 'Wood and iron',
+            b: 'Water and diamonds',
+            c: 'Water and lava',
         },
-        correctAnswer: 'b'
+        correctAnswer: 'c'
 
 
     },
 
     {
-        question: "what is 2+2",
+        question: "How many people play Minecraft every month?",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: '55 million +',
+            b: '100',
+            c: '15 million',
         },
-        correctAnswer: 'b'
+        correctAnswer: 'a'
 
 
     },
 
     {
-        question: "what is 2+2",
+        question: "what real-life animal was recorded to make the sound effects of the Ghasts?",
         answers: {
-            a: '4',
-            b: '8',
-            c: '6',
+            a: 'Dog',
+            b: 'Cat',
+            c: 'Snake',
         },
         correctAnswer: 'b'
 
@@ -117,7 +117,21 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
 
         quizContainer.innerHTML = output.join('');
     }
+    function validateAnswers (quizContainer){
+        var answerContainers = quizContainer.querySelectorAll('.answers');
+        for (var i = 0; i < questions.length; i++){
+            var userAnswer =
+                (answerContainers[i].querySelector('input[name=question' + i + ']:checked') ||
+                    {}).value;
 
+            if (userAnswer == null){
+                return false;
+            }
+            
+        }
+        return true;
+
+    }
     function showResults(questions, quizContainer, resultsContainer) {
 
         var answerContainers = quizContainer.querySelectorAll('.answers');
@@ -150,7 +164,15 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton) 
 
 
     submitButton.onclick = function () {
-        showResults(questions, quizContainer, resultsContainer);
+        if (validateAnswers(quizContainer)){
+            showResults(questions, quizContainer, resultsContainer); 
+        
+        }
+
+        else {
+            alert('Answer all questions!');
+        }
+        
 
     }
 
